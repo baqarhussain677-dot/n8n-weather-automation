@@ -1,0 +1,103 @@
+{
+  "name": "My workflow 5",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -288,
+        0
+      ],
+      "id": "343400c5-0737-4036-844c-d2e5005cc242",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://wttr.in/karachi?format=3",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        -32,
+        0
+      ],
+      "id": "2c7e5a54-d8f9-4edc-80bf-4a89df61e3da",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "sendTo": "youremail@gmail.com",
+        "subject": "Daily Karachi Weather Update",
+        "message": "={{ $json.data }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        192,
+        0
+      ],
+      "id": "30b98923-f30a-4ae1-818b-cdb0d4b2f580",
+      "name": "Send a message",
+      "webhookId": "76f704f7-89ee-4a6a-b021-aa6d4b55e51d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "OT8yh9HJQeaEYoaW",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "timezone": "Asia/Karachi",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "6b7b5c90-fd66-426f-9419-b3676f5d0b77",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9edb02d2dd34e455890dd35a263da0fd5ee0b65e160cd314aa6d67be5982c2d0"
+  },
+  "nodeGroups": [],
+  "id": "dKMuySG8Ygr7Vzp3",
+  "tags": []
+}
